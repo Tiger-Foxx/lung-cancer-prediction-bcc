@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modélisation Mathématique  - Détection du Cancer de la Peau</title>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #2962ff;
+            --text-color: #263238;
+            --light-bg: #f5f7fa;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: "Crimson Text", Georgia, serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .authors {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .formula {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .theorem {
+            background-color: #e8f5e9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .theorem::before {
+            content: "Théorème";
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #388e3c;
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .definition {
+            background-color: #e3f2fd;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .definition::before {
+            content: "Définition";
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .references {
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: var(--border-radius);
+            margin-top: 3rem;
+        }
+
+        .references h2 {
+            margin-top: 0;
+        }
+
+        .references ol {
+            padding-left: 1.2rem;
+        }
+
+        .references li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Formulation Mathématique </h1>
+        <div class="subtitle">Détection du Cancer de la Peau (BCC) par Machine Learning</div>
+        <div class="authors">
+            Projet de Machine Learning<br>
+            Département de Genie informatique - Sciences de l'ingénieur Master 1
+        </div>
+    </div>
+
+    <section>
+        <h2>1. Introduction aux Fondements Théoriques</h2>
+
+        <div class="definition">
+            <h3>1.1 Espace Mathématique des Images</h3>
+            <p>Soit \(\mathcal{X}\) l'espace des images dermatologiques défini comme :</p>
+            <div class="formula">
+                \[\mathcal{X} = \{x \in \mathbb{R}^{H \times W \times C} \mid x_{h,w,c} \in [0,1], \forall h,w,c\}\]
+                où :
+                <ul>
+                    <li>\(H\) : hauteur de l'image (pixels)</li>
+                    <li>\(W\) : largeur de l'image (pixels)</li>
+                    <li>\(C = 3\) : canaux de couleur RGB</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="definition">
+            <h3>1.2 Espace des Étiquettes</h3>
+            <p>L'espace des étiquettes \(\mathcal{Y}\) est défini comme :</p>
+            <div class="formula">
+                \[\mathcal{Y} = \{0,1\} \text{ où :}\]
+                \[
+                y_i = \begin{cases}
+                    0 & \text{absence de BCC} \\
+                    1 & \text{présence de BCC}
+                \end{cases}
+                \]
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Formalisation du Problème d'Apprentissage</h2>
+
+        <div class="theorem">
+            <h3>2.1 Ensemble d'Apprentissage</h3>
+            <p>L'ensemble d'apprentissage \(\mathcal{D}\) est défini comme :</p>
+            <div class="formula">
+                \[\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n \subset \mathcal{X} \times \mathcal{Y}\]
+                avec les propriétés suivantes :
+                <ul>
+                    <li>Cardinalité : \(|\mathcal{D}| = n\)</li>
+                    <li>Distribution : \((x_i, y_i) \sim P_{X,Y}\)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theorem">
+            <h3>2.2 Objectif d'Optimisation</h3>
+            <div class="formula">
+                \[\theta^* = \arg\min_\theta \underbrace{\frac{1}{n}\sum_{i=1}^n \mathcal{L}(f_\theta(x_i), y_i)}_{\text{Erreur empirique}} + \underbrace{\lambda \Omega(\theta)}_{\text{Régularisation}}\]
+                où :
+                <ul>
+                    <li>\(f_\theta: \mathcal{X} \rightarrow [0,1]\) : fonction de décision</li>
+                    <li>\(\mathcal{L}\) : fonction de perte (cross-entropy binaire)</li>
+                    <li>\(\Omega(\theta)\) : terme de régularisation</li>
+                    <li>\(\lambda > 0\) : hyperparamètre de régularisation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Pipeline de Prétraitement</h2>
+
+        <div class="definition">
+            <h3>3.1 Normalisation des Données</h3>
+            <div class="formula">
+                \[x'_{i} = \frac{x_i - \mu}{\sigma}\]
+                où :
+                <ul>
+                    <li>\(\mu = \frac{1}{n}\sum_{i=1}^n x_i\) : moyenne empirique</li>
+                    <li>\(\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \mu)^2}\) : écart-type empirique</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="definition">
+            <h3>3.2 Augmentation des Données</h3>
+            <p>Soit \(\mathcal{T}\) l'ensemble des transformations :</p>
+            <div class="formula">
+                \[\mathcal{T} = \{t_j: \mathcal{X} \rightarrow \mathcal{X}\}_{j=1}^m\]
+                comprenant :
+                <ul>
+                    <li>Rotations : \(R_\theta(x), \theta \in [-30°, 30°]\)</li>
+                    <li>Réflexions : \(F_h(x), F_v(x)\)</li>
+                    <li>Ajustements de luminosité : \(B_\alpha(x), \alpha \in [0.8, 1.2]\)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Méthodes de Classification</h2>
+
+        <div class="definition">
+            <h3>4.1 k-Plus Proches Voisins (k-NN)</h3>
+            <div class="formula">
+                \[f_{kNN}(x) = \frac{1}{k}\sum_{j \in \mathcal{N}_k(x)} y_j\]
+                où \(\mathcal{N}_k(x)\) est l'ensemble des indices des k plus proches voisins de x selon la métrique :
+                \[d(x_i, x_j) = \|x_i - x_j\|_2\]
+            </div>
+        </div>
+
+        <div class="definition">
+            <h3>4.2 Régression Logistique</h3>
+            <div class="formula">
+                \[P(Y=1|x) = \sigma(w^T x + b)\]
+                avec la fonction sigmoïde :
+                \[\sigma(z) = \frac{1}{1 + e^{-z}}\]
+            </div>
+        </div>
+
+        <div class="definition">
+            <h3>4.3 SVM avec Noyau RBF</h3>
+            <div class="formula">
+                \[f_{SVM}(x) = \text{sign}\left(\sum_{i=1}^n \alpha_i y_i K(x_i, x) + b\right)\]
+                avec le noyau RBF :
+                \[K(x_i, x) = \exp(-\gamma \|x_i - x\|^2)\]
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Évaluation et Validation</h2>
+
+        <div class="theorem">
+            <h3>5.1 Métriques de Performance</h3>
+            <div class="formula">
+                <p>Précision : \[P = \frac{TP}{TP + FP}\]</p>
+                <p>Rappel : \[R = \frac{TP}{TP + FN}\]</p>
+                <p>F1-Score : \[F1 = 2\cdot\frac{P\cdot R}{P + R}\]</p>
+                <p>AUC-ROC : \[AUC = \int_0^1 TPR(FPR^{-1}(x))dx\]</p>
+            </div>
+        </div>
+
+        <div class="theorem">
+            <h3>5.2 Validation Croisée k-fold</h3>
+            <div class="formula">
+                \[CV_{score} = \frac{1}{k}\sum_{j=1}^k \text{score}(\mathcal{D}_j^{test})\]
+                avec intervalle de confiance :
+                \[IC_{95\%} = \bar{score} \pm 1.96 \cdot \frac{s}{\sqrt{k}}\]
+            </div>
+        </div>
+    </section>
+
+    <section class="references">
+        <h2>Références</h2>
+        <ol>
+            <li>Bishop, C. M. (2006). Pattern Recognition and Machine Learning. Springer.</li>
+            <li>Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.</li>
+            <li>Vapnik, V. N. (1998). Statistical Learning Theory. Wiley-Interscience.</li>
+        </ol>
+    </section>
+
+    <div class="footer">
+        © 2024 - Projet de Machine learning - Sciences de l'ingénieur M1-GI<br>
+        Version 1.0 - Dernière mise à jour : Décembre 2024
+    </div>
+</body>
+</html>
