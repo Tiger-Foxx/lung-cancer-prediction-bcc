@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = lung-cancer-prediction-bcc
+PROJECT_NAME = skin-cancer-prediction-bcc
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 

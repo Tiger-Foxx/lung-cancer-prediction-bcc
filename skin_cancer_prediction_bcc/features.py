@@ -4,7 +4,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from lung_cancer_prediction_bcc.config import PROCESSED_DATA_DIR
+from skin_cancer_prediction_bcc.config import PROCESSED_DATA_DIR
 
 app = typer.Typer()
 

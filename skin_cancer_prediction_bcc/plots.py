@@ -4,7 +4,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from lung_cancer_prediction_bcc.config import MODELS_DIR, PROCESSED_DATA_DIR
+from skin_cancer_prediction_bcc.config import FIGURES_DIR, PROCESSED_DATA_DIR
 
 app = typer.Typer()
 
@@ -12,17 +12,16 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    features_path: Path = PROCESSED_DATA_DIR / "test_features.csv",
-    model_path: Path = MODELS_DIR / "model.pkl",
-    predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv",
+    input_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
+    output_path: Path = FIGURES_DIR / "plot.png",
     # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Performing inference for model...")
+    logger.info("Generating plot from data...")
     for i in tqdm(range(10), total=10):
         if i == 5:
             logger.info("Something happened for iteration 5.")
-    logger.success("Inference complete.")
+    logger.success("Plot generation complete.")
     # -----------------------------------------
 
 

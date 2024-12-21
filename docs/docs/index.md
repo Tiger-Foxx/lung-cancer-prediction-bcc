@@ -1,4 +1,4 @@
-# Lung-Cancer-Prediction-BCC documentation!
+# Skin-Cancer-Prediction-BCC documentation!
 
 ## Description
 

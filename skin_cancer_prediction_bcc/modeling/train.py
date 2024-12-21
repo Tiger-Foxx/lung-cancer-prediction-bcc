@@ -4,7 +4,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from lung_cancer_prediction_bcc.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
+from skin_cancer_prediction_bcc.config import MODELS_DIR, PROCESSED_DATA_DIR
 
 app = typer.Typer()
 
@@ -12,16 +12,17 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    input_path: Path = RAW_DATA_DIR / "dataset.csv",
-    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-    # ----------------------------------------------
+    features_path: Path = PROCESSED_DATA_DIR / "features.csv",
+    labels_path: Path = PROCESSED_DATA_DIR / "labels.csv",
+    model_path: Path = MODELS_DIR / "model.pkl",
+    # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Processing dataset...")
+    logger.info("Training some model...")
     for i in tqdm(range(10), total=10):
         if i == 5:
             logger.info("Something happened for iteration 5.")
-    logger.success("Processing dataset complete.")
+    logger.success("Modeling training complete.")
     # -----------------------------------------
 
 
