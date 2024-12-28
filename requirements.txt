@@ -7,4 +7,6 @@ pip
 python-dotenv
 tqdm
 typer
+tensorflow
+opencv-python
 -e .
