@@ -86,8 +86,8 @@ class GestionnairePrediction:
         self.preprocesseur_image = PreprocesseurImage()
         self.preprocesseur_metadonnees = PreprocesseurMetadonnees()
         self.modeles = {}
-        self.chemin_base_modeles = '../models'
-
+        # Dans utils.py, modifiez:
+        self.chemin_base_modeles = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models')
     def charger_modele(self, type_modele: str, taille: str, type_image: str) -> object:
         """Charge le modèle approprié selon les paramètres."""
         taille1Chiffre = extraire_premier_nombre(taille)

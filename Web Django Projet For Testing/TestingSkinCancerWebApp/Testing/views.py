@@ -10,6 +10,7 @@ def home(request):
     return render(request, 'predict.html')
 
 def predict(request):
+    print('predict.....')
     if request.method == 'POST' and request.FILES.get('image'):
         try:
             # Récupération des données

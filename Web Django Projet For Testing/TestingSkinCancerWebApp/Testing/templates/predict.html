@@ -24,7 +24,10 @@
                     <div class="flex items-center justify-center">
                         <label for="image" class="cursor-pointer">
                             <div class="p-4">
-                                <img src="{% static 'prediction/img/upload-icon.svg' %}" alt="Upload" class="mx-auto h-16 w-16" id="previewImage">
+<img src="{% static 'img/img.png' %}"
+     alt="Upload"
+     class="mx-auto max-h-64 w-auto"
+     id="previewImage">
                                 <p class="mt-4 text-gray-600">Déposez votre image ici ou cliquez pour sélectionner</p>
                             </div>
                             <input type="file" id="image" name="image" class="hidden" accept="image/*" required>
