@@ -1,7 +1,9 @@
 black
 flake8
+pillow
 isort
 loguru
+jolib
 mkdocs
 pip
 python-dotenv

@@ -1,0 +1,66 @@
+/* Fichier: static/prediction/css/styles.css */
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Styles personnalisés */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.image-preview {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-zone {
+    transition: all 0.3s ease;
+}
+
+.upload-zone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-result {
+    background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f8 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.confidence-bar {
+    height: 8px;
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+    border-radius: 4px;
+    transition: width 1s ease-out;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

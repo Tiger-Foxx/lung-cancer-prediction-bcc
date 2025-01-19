@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- En-tête -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
+            <h1 class="text-3xl font-bold text-white text-center">
+                Détection du Cancer de la Peau (BCC)
+            </h1>
+            <p class="text-white text-center mt-2 opacity-90">
+                Système d'Intelligence Artificielle pour l'analyse dermatologique
+            </p>
+        </div>
+
+        <!-- Formulaire -->
+        <form method="POST" enctype="multipart/form-data" class="p-6 space-y-6" id="predictionForm">
+            {% csrf_token %}
+
+            <!-- Zone de dépôt d'image -->
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors duration-200">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-center">
+                        <label for="image" class="cursor-pointer">
+                            <div class="p-4">
+                                <img src="{% static 'prediction/img/upload-icon.svg' %}" alt="Upload" class="mx-auto h-16 w-16" id="previewImage">
+                                <p class="mt-4 text-gray-600">Déposez votre image ici ou cliquez pour sélectionner</p>
+                            </div>
+                            <input type="file" id="image" name="image" class="hidden" accept="image/*" required>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Métadonnées -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label for="age" class="block text-sm font-medium text-gray-700">Âge du patient</label>
+                    <input type="number" id="age" name="age" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div class="space-y-2">
+                    <label for="location" class="block text-sm font-medium text-gray-700">Localisation</label>
+                    <select id="location" name="location" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Sélectionnez une localisation</option>
+                        <option value="face">Visage</option>
+                        <option value="scalp">Cuir chevelu</option>
+                        <option value="neck">Cou</option>
+                        <option value="trunk">Tronc</option>
+                        <option value="hand">Main</option>
+                        <option value="foot">Pied</option>
+                        <option value="back">Dos</option>
+                        <option value="chest">Poitrine</option>
+                        <option value="ear">Oreille</option>
+                        <option value="genital">Zone génitale</option>
+                        <option value="lower extremity">Membre inférieur</option>
+                        <option value="upper extremity">Membre supérieur</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="flex justify-center">
+                <button type="submit"
+                        class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg
+                               hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
+                               transform transition hover:-translate-y-0.5">
+                    Lancer l'analyse
+                </button>
+            </div>
+        </form>
+
+        <!-- Zone de résultat (initialement cachée) -->
+        <div id="resultSection" class="hidden p-6 bg-gray-50 border-t">
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Résultats de l'analyse</h2>
+                <div id="resultContent" class="space-y-4">
+                    <!-- Le résultat sera inséré ici par JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
